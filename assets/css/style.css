@@ -1,0 +1,11 @@
+.brownback{
+	background-color:#7e462f;
+	color: white;
+	padding: 30px;
+	border-radius:5px;
+
+}
+input{
+	display: block;
+	width: 100%;
+}
