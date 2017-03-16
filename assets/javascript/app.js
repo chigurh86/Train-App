@@ -51,17 +51,20 @@ $("#submitBtn").on("click", function(event){
 	database.ref().on("child_added", function(mySnapshot){
  	var childSnapshot  = mySnapshot ;
  	var earlierTrain = childSnapshot.val().firstTrain;
+ 	console.log(earlierTrain);
 	var howOften  = childSnapshot.val().frequency;
  	
  // Plug the inputs into conversion functions
 
-	var earlierTrainConverted = moment(earlierTrain, "hh:mm");
- 	console.log(earlierTrainConverted);
+	var earlierTrainConverted = moment(earlierTrain, "hh:mm").subtract(1, "years");
+	console.log(earlierTrainConverted);
 	var currentTime = moment();
 	var diffTime = moment().diff(moment(earlierTrainConverted), "minutes");
+	console.log(diffTime);
 	var tRemainder = diffTime % howOften;
 	var tMinutesTillTrain = howOften - tRemainder;
 	var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+	nextTrain = moment(nextTrain).format("hh:mm");
 
  	$("tbody").append(
  		" <tr><td> " + childSnapshot.val().name +
